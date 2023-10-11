@@ -18,13 +18,15 @@ app.json.compact = False
 migrate = Migrate(app, db)
 
 db.init_app(app)
-# initialize flask restful
-api = Api(app)
 
 
 @app.route('/')
 def home():
     return ''
+
+
+# initialize flask restful
+api = Api(app)
 
 
 class ScientistList(Resource):
