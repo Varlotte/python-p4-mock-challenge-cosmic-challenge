@@ -56,7 +56,7 @@ class Scientist(db.Model, SerializerMixin):
             raise ValueError("Must have a name attribute")
 
     @validates("field_of_study")
-    def validate_field_of_study(self, key, field_of_study):
+    def validates_field_of_study(self, key, field_of_study):
         if field_of_study and len(field_of_study) >= 1:
             return field_of_study
         else:
@@ -72,9 +72,6 @@ class Mission(db.Model, SerializerMixin):
     # Add relationships
     scientist_id = db.Column(db.Integer, db.ForeignKey("scientists.id"))
     planet_id = db.Column(db.Integer, db.ForeignKey("planets.id"))
-
-    planet = db.relationship("Planet", back_populates="missions")
-    scientist = db.relationship("Scientist", back_populates="missions")
 
     # Add serialization rules
     serialize_rules = ("-planet.missions", "-scientist.missions")
