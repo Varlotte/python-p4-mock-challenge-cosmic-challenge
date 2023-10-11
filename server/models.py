@@ -92,7 +92,7 @@ class Mission(db.Model, SerializerMixin):
     scientist_id = db.Column(db.Integer, db.ForeignKey(
         'scientists.id'), nullable=False)
     # Add serialization rules
-    serialize_rules = ("-planet.missions", "-scientists.missions",)
+    serialze_rules = ("-planet.missions", "-scientists.missions",)
 
     # Add validation name, scientist_id, planet_id
 

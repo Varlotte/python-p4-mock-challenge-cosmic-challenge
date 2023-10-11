@@ -27,12 +27,13 @@ api = Api(app)
 # def home():
 #     return ''
 
-
 # get all planets from API
+
+
 class PlanetList(Resource):
     def get(self):
         planets = Planet.query.all()
-        return [planet.to_dict(rules=("-missions",)) for planet in planets]
+        return [planet.to_dict(rules=("-missions",)) for planet in planets], 200
 
 
 api.add_resource(PlanetList, '/planets')
@@ -61,7 +62,7 @@ api.add_resource(MissionList, '/missions')
 class ScientistList(Resource):
     def get(self):
         scientists = Scientist.query.all()
-        return [scientist.to_dict(rules=("-missions",)) for scientist in scientists]
+        return [scientist.to_dict(rules=("-missions",)) for scientist in scientists], 200
 
 # post to create new scientist, accepts name and field, returns error 400
     def post(self):
@@ -110,7 +111,6 @@ class ScientistItem(Resource):
             return {"errors": ["validation errors"]}, 400
 
     # delete scientist with id, return empty response body and http code
-    # if no scientist return error scientist not found
 
     def delete(self, id):
         scientist = Scientist.query.get(id)
